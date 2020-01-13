@@ -4,17 +4,17 @@ type Task {
   desc: String @default(value:"")
   dueDate: DateTime
   user: User!
-  status: Status @relation(name: "TaskStatusRel")
-  category: Category @relation(name: "TaskCategoryRel")
-  subTasks: [SubTask!]! @relation(name: "TaskSubTaskRel", onDelete: CASCADE)
-  files: [String!]!
+  status: Status
+  category: Category
+  subTasks: [SubTask!]! @relation(onDelete: CASCADE)
+  files: [String!]! @scalarList(strategy: RELATION) 
 }
 
 type SubTask {
   id: ID! @id
   text: String!
   done: Boolean @default(value: false)
-  parentTask: Task! @relation(name: "TaskSubTasksRel")
+  parentTask: Task!
 }
 
 type User {
@@ -24,16 +24,17 @@ type User {
   loginSecret: String @default(value:"")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  tasks: [Task!]!
 }
 
 type Status {
   id: ID! @id
   text: String! @unique
-  tasks: [Task!]! @relation(name: "TaskStatusRel")
+  tasks: [Task!]!
 }
 
 type Category {
   id: ID! @id
   text: String! @unique
-  tasks: [Task!]! @relation(name: "TaskCategoryRel")
+  tasks: [Task!]!
 }
