@@ -1,0 +1,40 @@
+type Task {
+  id: ID!
+  title: String!
+  desc: String
+  dueDate: String
+  user: User!
+  status: Status
+  category: Category
+  subTasks: [SubTask!]!
+  files: [String!]!
+}
+
+type SubTask {
+  id: ID!
+  text: String!
+  done: Boolean
+  parentTask: Task!
+}
+
+type User {
+  id: ID!
+  email: String!
+  username: String!
+  loginSecret: String
+  createdAt: String!
+  updatedAt: String!
+  tasks: [Task!]!
+}
+
+type Status {
+  id: ID!
+  text: String!
+  tasks: [Task!]!
+}
+
+type Category {
+  id: ID!
+  text: String!
+  tasks: [Task!]!
+}
