@@ -1,0 +1,12 @@
+type Mutation {
+  updateTask(
+    taskId: String!
+    title: String
+    desc: String
+    dueDate: String
+    status: String
+    categoryText: String
+    subTasks: [String!]
+    files: [String!]
+  ): Task!
+}

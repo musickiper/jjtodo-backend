@@ -6,10 +6,10 @@ export default {
       const { email, username } = args;
 
       try {
-        const exists = await prisma.$exists.user({
+        const userExists = await prisma.$exists.user({
           OR: [{ email }, { username }]
         });
-        if (exists) {
+        if (userExists) {
           throw Error("The username or email is already taken");
         } else {
           await prisma.createUser({

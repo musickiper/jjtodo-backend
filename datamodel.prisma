@@ -4,10 +4,16 @@ type Task {
   desc: String @default(value:"")
   dueDate: DateTime
   user: User!
-  status: Status
+  status: StatusOption
   category: Category
   subTasks: [SubTask!]! @relation(onDelete: CASCADE)
-  files: [String!]! @scalarList(strategy: RELATION) 
+  files: [File!]! @relation(name: "TaskFileRel", onDelete: CASCADE)
+}
+
+enum StatusOption {
+  PROGRESS,
+  PENDING,
+  COMPLETE
 }
 
 type SubTask {
@@ -27,14 +33,14 @@ type User {
   tasks: [Task!]!
 }
 
-type Status {
+type Category {
   id: ID! @id
   text: String! @unique
   tasks: [Task!]!
 }
 
-type Category {
+type File {
   id: ID! @id
-  text: String! @unique
-  tasks: [Task!]!
+  url: String!
+  task: Task! @relation(name: "TaskFileRel")
 }

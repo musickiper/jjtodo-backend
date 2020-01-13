@@ -4,10 +4,16 @@ type Task {
   desc: String
   dueDate: String
   user: User!
-  status: Status
+  status: StatusOption
   category: Category
   subTasks: [SubTask!]!
   files: [String!]!
+}
+
+enum StatusOption {
+  PROGRESS
+  PENDING
+  COMPLETE
 }
 
 type SubTask {
