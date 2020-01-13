@@ -1,0 +1,39 @@
+type Task {
+  id: ID! @id
+  title: String!
+  desc: String @default(value:"")
+  dueDate: DateTime
+  user: User!
+  status: Status @relation(name: "TaskStatusRel")
+  category: Category @relation(name: "TaskCategoryRel")
+  subTasks: [SubTask!]! @relation(name: "TaskSubTaskRel", onDelete: CASCADE)
+  files: [String!]!
+}
+
+type SubTask {
+  id: ID! @id
+  text: String!
+  done: Boolean @default(value: false)
+  parentTask: Task! @relation(name: "TaskSubTasksRel")
+}
+
+type User {
+  id: ID! @id
+  email: String! @unique
+  username: String! @unique
+  loginSecret: String @default(value:"")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Status {
+  id: ID! @id
+  text: String! @unique
+  tasks: [Task!]! @relation(name: "TaskStatusRel")
+}
+
+type Category {
+  id: ID! @id
+  text: String! @unique
+  tasks: [Task!]! @relation(name: "TaskCategoryRel")
+}
