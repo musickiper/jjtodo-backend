@@ -1,0 +1,3 @@
+type Query {
+  taskById(taskId: String!): Task!
+}
