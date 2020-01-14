@@ -7,7 +7,7 @@ type Task {
   status: StatusOption
   category: Category
   subTasks: [SubTask!]!
-  files: [String!]!
+  files: [File!]!
 }
 
 enum StatusOption {
@@ -43,4 +43,9 @@ type Category {
   id: ID!
   text: String!
   tasks: [Task!]!
+}
+type File {
+  id: ID!
+  url: String!
+  task: Task!
 }
