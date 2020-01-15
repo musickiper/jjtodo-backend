@@ -1,0 +1,3 @@
+type Mutation {
+    updateSubTask(subTaskId: String!, done: Boolean!): SubTask!
+}

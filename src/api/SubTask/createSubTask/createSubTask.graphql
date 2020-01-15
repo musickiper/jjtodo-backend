@@ -1,0 +1,3 @@
+type Mutation {
+    createSubTask(text: String!, parentTaskId: String!): SubTask!
+}
